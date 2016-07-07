@@ -1,0 +1,24 @@
+{
+  "name": "utf8js",
+  "version": "0.1.0",
+  "description": "Fast UTF-8 encoding/decoding for browsers and Node.",
+  "main": "utf8.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Benzinga/utf8js.git"
+  },
+  "keywords": [
+    "utf8",
+    "unicode",
+    "browser"
+  ],
+  "author": "John Chadwick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Benzinga/utf8js/issues"
+  },
+  "homepage": "https://github.com/Benzinga/utf8js#readme"
+}
