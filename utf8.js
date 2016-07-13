@@ -27,7 +27,7 @@
   };
 
   NodeJSCodec.prototype.decode = function (buf) {
-    return Promise.resolve(Buffer.from(buf).toString('utf8'));
+    return Promise.resolve((new Buffer(buf)).toString('utf8'));
   };
 
   utf8['NodeJSCodec'] = NodeJSCodec;
