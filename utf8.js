@@ -23,7 +23,7 @@
     function NodeJSCodec() {}
 
     NodeJSCodec.prototype.encode = function(str) {
-        return Promise.resolve(new Uint8Array(Buffer.from(str, 'utf8')));
+        return Promise.resolve(new Uint8Array(new Buffer(str, 'utf8')));
     }
 
     NodeJSCodec.prototype.decode = function(buf) {
