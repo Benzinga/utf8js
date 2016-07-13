@@ -4,17 +4,29 @@
   var utf8 = {};
   var root = this;
 
+  // If there's no Promise, try to import plite.
+  var PromiseImpl = root.Promise;
+  if (PromiseImpl === undefined) {
+    // Determine if we're in a CommonJS-compatible environment
+    // i.e. Node/Webpack/Browserify.
+    if (typeof module !== 'undefined' && module.exports) {
+      PromiseImpl = require('plite');
+    } else {
+      console.error('Promise implementation unavailable.');
+    }
+  }
+
   // NativeCodec implements UTF-8 encoding/decoding using native APIs,
   // namely those of TextEncoder/TextDecoder. These APIs are the most
   // efficient.
   function NativeCodec () {}
 
   NativeCodec.prototype.encode = function (str) {
-    return Promise.resolve((new root.TextEncoder()).encode(str));
+    return PromiseImpl.resolve((new root.TextEncoder()).encode(str));
   };
 
   NativeCodec.prototype.decode = function (buf) {
-    return Promise.resolve((new root.TextDecoder()).decode(buf));
+    return PromiseImpl.resolve((new root.TextDecoder()).decode(buf));
   };
 
   utf8['NativeCodec'] = NativeCodec;
@@ -23,11 +35,11 @@
   function NodeJSCodec () {}
 
   NodeJSCodec.prototype.encode = function (str) {
-    return Promise.resolve(new Uint8Array(new Buffer(str, 'utf8')));
+    return PromiseImpl.resolve(new Uint8Array(new Buffer(str, 'utf8')));
   };
 
   NodeJSCodec.prototype.decode = function (buf) {
-    return Promise.resolve((new Buffer(buf)).toString('utf8'));
+    return PromiseImpl.resolve((new Buffer(buf)).toString('utf8'));
   };
 
   utf8['NodeJSCodec'] = NodeJSCodec;
@@ -41,7 +53,7 @@
     var blob = new root.Blob([str], {type: 'text/plain; charset=utf-8'});
     var reader = new root.FileReader();
 
-    return new Promise(function (resolve, reject) {
+    return new PromiseImpl(function (resolve, reject) {
       reader.onload = function (e) { resolve(reader.result); };
       reader.onerror = function (e) { resolve(reader.error); };
       reader.readAsArrayBuffer(blob);
@@ -52,7 +64,7 @@
     var blob = new root.Blob([buf], {type: 'text/plain; charset=utf-8'});
     var reader = new root.FileReader();
 
-    return new Promise(function (resolve, reject) {
+    return new PromiseImpl(function (resolve, reject) {
       reader.onload = function (e) { resolve(reader.result); };
       reader.onerror = function (e) { resolve(reader.error); };
       reader.readAsText(blob);
@@ -137,7 +149,7 @@
       }
     }
 
-    return Promise.resolve(buf.buffer);
+    return PromiseImpl.resolve(buf.buffer);
   };
 
   // This decoder is based on "Flexible and Economical UTF-8 Decoder"
@@ -202,7 +214,7 @@
       codepoint = 0;
     }
 
-    return Promise.resolve(str);
+    return PromiseImpl.resolve(str);
   };
 
   utf8['JSCodec'] = JSCodec;
