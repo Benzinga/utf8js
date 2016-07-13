@@ -1,6 +1,6 @@
 {
   "name": "utf8js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Fast UTF-8 encoding/decoding for browsers and Node.",
   "main": "utf8.js",
   "scripts": {
