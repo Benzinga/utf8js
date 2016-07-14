@@ -1,4 +1,4 @@
-# utf8js [![NPM version](https://badge.fury.io/js/utf8js.svg)](https://www.npmjs.com/package/utf8js)
+# utf8js [![NPM version](https://badge.fury.io/js/utf8js.svg)](https://www.npmjs.com/package/utf8js) [![Build Status](https://travis-ci.org/Benzinga/utf8js.svg?branch=master)](https://travis-ci.org/Benzinga/utf8js) [![codecov](https://codecov.io/gh/Benzinga/utf8js/branch/master/graph/badge.svg)](https://codecov.io/gh/Benzinga/utf8js)
 utf8.js is a fast UTF-8 encoder/decoder for JavaScript. It attempts to use native encoding/decoding methods whenever possible. It requires Promises and Typed Arrays, both of which can be polyfilled. On modern computers, when using native methods, the decoding speeds should exceed 100 MiB/s. Encoding should be fast even if native methods are not available.
 
 ## API
