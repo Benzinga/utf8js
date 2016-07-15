@@ -35,11 +35,11 @@
   function NodeJSCodec () {}
 
   NodeJSCodec.prototype.encode = function (str) {
-    return PromiseImpl.resolve(new Uint8Array(new Buffer(str, 'utf8')));
+    return PromiseImpl.resolve(new Uint8Array(new Buffer(str, 'utf8')).buffer);
   };
 
   NodeJSCodec.prototype.decode = function (buf) {
-    return PromiseImpl.resolve((new Buffer(buf)).toString('utf8'));
+    return PromiseImpl.resolve((new Buffer(new Uint8Array(buf))).toString('utf8'));
   };
 
   utf8['NodeJSCodec'] = NodeJSCodec;
