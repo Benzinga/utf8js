@@ -16,7 +16,10 @@ describe('utf8', function () {
   describe('#encode', function () {
     it('should encode valid strings correctly', function () {
       for (var i = 0; i < validStrs.length; i++) {
-        expect(utf8.encode(validStrs[i].b)).to.eventually.deep.equal(new Uint8Array(validStrs[i].u).buffer);
+        var buf = utf8.encode(validStrs[i].b);
+        var expectedBuf = new Uint8Array(validStrs[i].u).buffer;
+
+        expect(buf).to.eventually.deep.equal(expectedBuf);
       }
     });
   });
@@ -24,7 +27,10 @@ describe('utf8', function () {
   describe('#decode', function () {
     it('should decode valid strings correctly', function () {
       for (var i = 0; i < validStrs.length; i++) {
-        expect(utf8.decode(validStrs[i].u)).to.eventually.deep.equal(validStrs[i].b);
+        var text = utf8.decode(validStrs[i].u);
+        var expectedText = validStrs[i].b;
+
+        expect(text).to.eventually.deep.equal(expectedText);
       }
     });
   });
